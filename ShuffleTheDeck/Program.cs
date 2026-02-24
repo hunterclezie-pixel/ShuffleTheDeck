@@ -64,5 +64,25 @@ namespace ShuffleTheDeck
             }
 
         }
+
+        static void DrawCard()
+        {
+            int letter = 0, number = 0;
+
+            do
+            {
+                letter = RandomNumberZeroTo(3);
+                number = RandomNumberZeroTo(12);
+            } while (drawnCards[letter, number]);
+
+            drawnCards[letter, number] = true;
+        }
+
+        static private int RandomNumberZeroTo(int max)
+        {
+            int range = max + 1; //make max inclusive
+            Random rand = new Random();
+            return rand.Next(range);
+        }
     }
 }
