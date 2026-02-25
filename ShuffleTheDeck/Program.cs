@@ -25,6 +25,9 @@ namespace ShuffleTheDeck
             {
                 Console.Clear();
 
+                Console.WriteLine("Welcome to Shuffle the Deck! please hit \"Enter\" to play");
+                Console.WriteLine("Press \"Q\" to quit anytime");
+                Console.WriteLine("Press \"C\" to clear for a new game any time");
                 Console.WriteLine($"Card count: {cardCount}");
                 Display();
                 DrawCard();
