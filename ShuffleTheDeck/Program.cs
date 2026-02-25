@@ -18,8 +18,21 @@ namespace ShuffleTheDeck
         static bool[,] drawnCards = new bool[4, 13];
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
-            Display();
+            string userInput = "";
+            int cardCount = 0;
+
+            do
+            {
+                Console.Clear();
+
+                Console.WriteLine($"Ball count: {cardCount}");
+                Display();
+                userInput = Console.ReadLine(); //fix double draw
+
+            } while (userInput != "Q" && userInput != "q");
+
+            Console.Clear();
+            Console.WriteLine("Thank you for playing cards, Have a great day!");
 
             //pause
             Console.Read();
