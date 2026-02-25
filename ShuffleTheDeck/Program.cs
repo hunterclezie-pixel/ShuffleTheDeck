@@ -24,7 +24,6 @@ namespace ShuffleTheDeck
             do
             {
                 Console.Clear();
-
                 Console.WriteLine("Welcome to Shuffle the Deck! please hit \"Enter\" to play");
                 Console.WriteLine("Press \"Q\" to quit anytime");
                 Console.WriteLine("Press \"C\" to clear for a new game any time");
@@ -43,12 +42,12 @@ namespace ShuffleTheDeck
 
             } while (userInput != "Q" && userInput != "q");
 
+            //exit message
             Console.Clear();
             Console.WriteLine("Thank you for playing cards, Have a great day!");
 
             //pause
             Console.Read();
-
         }
 
         static void Display()
@@ -58,6 +57,7 @@ namespace ShuffleTheDeck
             string placeHolder = "";
             string columnSeperator = "  |";
             string currentRow = "";
+
             //print heading row
             string[] heading = { "Spades", "Clubs", "Hearts", "Diamonds"};
             foreach (string thing in heading)
@@ -69,8 +69,7 @@ namespace ShuffleTheDeck
             //print the rest of the rows
             for (int number = 1; number <= 13; number++)
             {
-
-                //assemble the row
+                //assembles the row
                 for (int suits = 0; suits < 4; suits++)
                 {
                     if (drawnCards[suits, number - 1])
@@ -81,7 +80,6 @@ namespace ShuffleTheDeck
                     else
                     {
                         currentRow += placeHolder.PadLeft(padding) + columnSeperator;
-
                     }
                 }
                 Console.WriteLine(currentRow);
@@ -92,15 +90,15 @@ namespace ShuffleTheDeck
 
         static void DrawCard()
         {
-            int letter = 0, number = 0;
+            int suit = 0, number = 0;
 
+            //keep drawing until we get a card that hasn't been drawn yet
             do
             {
-                letter = RandomNumberZeroTo(3);
+                suit = RandomNumberZeroTo(3);
                 number = RandomNumberZeroTo(12);
-            } while (drawnCards[letter, number]);
-
-            drawnCards[letter, number] = true;
+            } while (drawnCards[suit, number]);
+            drawnCards[suit, number] = true;
         }
 
         static private int RandomNumberZeroTo(int max)
@@ -112,6 +110,7 @@ namespace ShuffleTheDeck
 
         static void ClearDrawnCards()
         {
+            // Clear the drawn cards by creating a new empty array and assigning it to drawnCards
             bool[,] emptyArray = new bool[4, 13];
             drawnCards = emptyArray;
             drawnCards = new bool[4, 13];
