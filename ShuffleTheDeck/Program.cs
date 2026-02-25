@@ -27,6 +27,8 @@ namespace ShuffleTheDeck
 
                 Console.WriteLine($"Ball count: {cardCount}");
                 Display();
+                DrawCard();
+                cardCount++;
                 userInput = Console.ReadLine(); //fix double draw
 
             } while (userInput != "Q" && userInput != "q");
