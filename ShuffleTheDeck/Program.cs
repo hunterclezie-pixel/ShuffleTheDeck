@@ -75,7 +75,7 @@ namespace ShuffleTheDeck
                 {
                     if (drawnCards[suits, number - 1])
                     {
-                        prettyNumber = number + (suits * 13);
+                        prettyNumber = number;
                         currentRow += prettyNumber.ToString().PadLeft(padding) + columnSeperator;
                     }
                     else
