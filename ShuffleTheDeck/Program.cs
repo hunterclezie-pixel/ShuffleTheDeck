@@ -31,6 +31,13 @@ namespace ShuffleTheDeck
                 cardCount++;
                 userInput = Console.ReadLine(); //fix double draw
 
+                // Clear the drawn cards if the user inputs C or c
+                if (userInput == "C" || userInput == "c")
+                {
+                    ClearDrawnCards();
+                    cardCount = 0;
+                }
+
             } while (userInput != "Q" && userInput != "q");
 
             Console.Clear();
@@ -98,6 +105,13 @@ namespace ShuffleTheDeck
             int range = max + 1; //make max inclusive
             Random rand = new Random();
             return rand.Next(range);
+        }
+
+        static void ClearDrawnCards()
+        {
+            bool[,] emptyArray = new bool[4, 13];
+            drawnCards = emptyArray;
+            drawnCards = new bool[4, 13];
         }
     }
 }
