@@ -25,7 +25,7 @@ namespace ShuffleTheDeck
             {
                 Console.Clear();
 
-                Console.WriteLine($"Ball count: {cardCount}");
+                Console.WriteLine($"Card count: {cardCount}");
                 Display();
                 DrawCard();
                 cardCount++;
