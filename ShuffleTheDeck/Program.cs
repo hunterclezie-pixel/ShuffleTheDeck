@@ -24,13 +24,26 @@ namespace ShuffleTheDeck
             do
             {
                 Console.Clear();
-                Console.WriteLine("Welcome to Shuffle the Deck! please hit \"Enter\" to play");
-                Console.WriteLine("Press \"Q\" to quit anytime");
-                Console.WriteLine("Press \"C\" to clear for a new game any time");
+                // Check if there are still cards to draw
+                if (cardCount < 52)
+                {
+                    Console.WriteLine("Welcome to Shuffle the Deck! please hit \"Enter\" to play");
+                    Console.WriteLine("Press \"Q\" to quit anytime");
+                    Console.WriteLine("Press \"C\" to clear for a new game any time");
+                    DrawCard();
+                    cardCount++;
+                }
+
+                // tells the user that all the cards have been drawn
+                else
+                {
+                    Console.WriteLine("All of the cards have been drawn!");
+                    Console.WriteLine("Press \"Q\" to quit");
+                    Console.WriteLine("Press \"C\" to clear for a new game!");
+                }
+
                 Console.WriteLine($"Card count: {cardCount}");
                 Display();
-                DrawCard();
-                cardCount++;
                 userInput = Console.ReadLine(); //fix double draw
 
                 // Clear the drawn cards if the user inputs C or c
@@ -59,7 +72,7 @@ namespace ShuffleTheDeck
             string columnSeperator = "  |";
             string currentRow = "";
 
-            // heading row
+            // heading row for each suit
             string[] heading = { "Spades", "Clubs", "Hearts", "Diamonds" };
             foreach (string thing in heading)
             {
@@ -67,7 +80,7 @@ namespace ShuffleTheDeck
             }
             Console.WriteLine();
 
-            //print the rest of the rows
+            //print the rest of the rows for each card rank
             for (int number = 1; number <= 13; number++)
             {
                 //assembles the row
@@ -108,9 +121,9 @@ namespace ShuffleTheDeck
 
         static void DrawCard()
         {
+            //keep drawing until we get a card that hasn't been drawn yet
             int suit = 0, number = 0;
 
-            //keep drawing until we get a card that hasn't been drawn yet
             do
             {
                 suit = RandomNumberZeroTo(3);
@@ -121,6 +134,7 @@ namespace ShuffleTheDeck
 
         static private int RandomNumberZeroTo(int max)
         {
+            // Generate a random number between 0 and max
             int range = max + 1; //make max inclusive
             Random rand = new Random();
             return rand.Next(range);
