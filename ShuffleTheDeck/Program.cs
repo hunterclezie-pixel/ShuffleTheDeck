@@ -40,6 +40,7 @@ namespace ShuffleTheDeck
                     cardCount = 0;
                 }
 
+            // continue until user inputs Q or q
             } while (userInput != "Q" && userInput != "q");
 
             //exit message
@@ -53,13 +54,13 @@ namespace ShuffleTheDeck
         static void Display()
         {
             int padding = 8;
-            int prettyNumber = 0;
+            string prettyRank = "";
             string placeHolder = "";
             string columnSeperator = "  |";
             string currentRow = "";
 
-            //print heading row
-            string[] heading = { "Spades", "Clubs", "Hearts", "Diamonds"};
+            // heading row
+            string[] heading = { "Spades", "Clubs", "Hearts", "Diamonds" };
             foreach (string thing in heading)
             {
                 Console.Write(thing.PadLeft(padding) + columnSeperator);
@@ -74,8 +75,26 @@ namespace ShuffleTheDeck
                 {
                     if (drawnCards[suits, number - 1])
                     {
-                        prettyNumber = number;
-                        currentRow += prettyNumber.ToString().PadLeft(padding) + columnSeperator;
+                        // Map numeric ranks to face card labels
+                        switch (number)
+                        {
+                            case 1:
+                                prettyRank = "A";
+                                break;
+                            case 11:
+                                prettyRank = "J";
+                                break;
+                            case 12:
+                                prettyRank = "Q";
+                                break;
+                            case 13:
+                                prettyRank = "K";
+                                break;
+                            default:
+                                prettyRank = number.ToString();
+                                break;
+                        }
+                        currentRow += prettyRank.ToString().PadLeft(padding) + columnSeperator;
                     }
                     else
                     {
@@ -85,7 +104,6 @@ namespace ShuffleTheDeck
                 Console.WriteLine(currentRow);
                 currentRow = ""; //Resets the row for the next iteration    
             }
-
         }
 
         static void DrawCard()
