@@ -7,12 +7,6 @@ github url: https://github.com/hunterclezie-pixel/ShuffleTheDeck.git
 */
 namespace ShuffleTheDeck
 {
-    // Todo list:
-    // [] Write a program that deals a card from a standard deck of 52 playing cards.
-    // [] The card should be a random suit (spades, clubs, hearts, diamonds) and value (2-10, J, Q, K, A).
-    // [] Use a multidimensional array to track if the card has already been dealt. If so, draw another random card.
-    // [] Shuffle the deck when there are no more cards left or anytime the user chooses.
-
     internal class Program
     {
         static bool[,] drawnCards = new bool[4, 13];
@@ -21,9 +15,11 @@ namespace ShuffleTheDeck
             string userInput = "";
             int cardCount = 0;
 
+            // The main game loop
             do
             {
                 Console.Clear();
+
                 // Check if there are still cards to draw
                 if (cardCount < 52)
                 {
@@ -34,7 +30,7 @@ namespace ShuffleTheDeck
                     cardCount++;
                 }
 
-                // tells the user that all the cards have been drawn
+                // Tells the user that all the cards have been drawn
                 else
                 {
                     Console.WriteLine("All of the cards have been drawn!");
@@ -53,7 +49,7 @@ namespace ShuffleTheDeck
                     cardCount = 0;
                 }
 
-            // continue until user inputs Q or q
+            // Continue until user inputs Q or q
             } while (userInput != "Q" && userInput != "q");
 
             //exit message
@@ -64,7 +60,7 @@ namespace ShuffleTheDeck
             Console.Read();
         }
 
-        static void Display()
+        static void Display() //displays the drawn cards in an array with the suits as columns and the number/ranks as rows
         {
             int padding = 8;
             string prettyRank = "";
@@ -119,7 +115,7 @@ namespace ShuffleTheDeck
             }
         }
 
-        static void DrawCard()
+        static void DrawCard() // Draws a card by generatinga random number within the range given
         {
             //keep drawing until we get a card that hasn't been drawn yet
             int suit = 0, number = 0;
@@ -129,20 +125,19 @@ namespace ShuffleTheDeck
                 suit = RandomNumberZeroTo(3);
                 number = RandomNumberZeroTo(12);
             } while (drawnCards[suit, number]);
+
             drawnCards[suit, number] = true;
         }
 
-        static private int RandomNumberZeroTo(int max)
+        static private int RandomNumberZeroTo(int max) // Generates a random number between 0 and the given max
         {
-            // Generate a random number between 0 and max
             int range = max + 1; //make max inclusive
             Random rand = new Random();
             return rand.Next(range);
         }
 
-        static void ClearDrawnCards()
+        static void ClearDrawnCards() // Clear the drawn cards by creating a new empty array and assigning it to drawnCards
         {
-            // Clear the drawn cards by creating a new empty array and assigning it to drawnCards
             bool[,] emptyArray = new bool[4, 13];
             drawnCards = emptyArray;
             drawnCards = new bool[4, 13];
